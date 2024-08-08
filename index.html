@@ -49,6 +49,7 @@
 <body>
     <h1>몬티 홀 문제</h1>
     <div id="game-container">
+        <!-- input-section이 존재하는지 확인 -->
         <div id="input-section">
             <label for="doors">문의 개수를 입력하세요 (3 이상의 자연수):</label>
             <input type="number" id="doors" min="3">
@@ -132,29 +133,52 @@
                 </div>
             `;
 
-            document.getElementById('input-section').style.display = 'none';
+            // 계산 후 input-section을 숨김
+            const inputSection = document.getElementById('input-section');
+            if (inputSection) {
+                inputSection.style.display = 'none';
+            } else {
+                console.error("input-section 요소를 찾을 수 없습니다.");
+            }
+
             document.getElementById('reset-button').style.display = 'inline-block';
             document.getElementById('close-button').style.display = 'inline-block';
         }
 
         function resetGame() {
-            // 초기화 작업 수행
-            document.getElementById('doors').value = '';
-            document.getElementById('cars').value = '';
-            document.getElementById('results').innerHTML = '';
-            document.getElementById('reset-button').style.display = 'none';
-            document.getElementById('close-button').style.display = 'none';
-            document.getElementById('input-section').style.display = 'block';
+            // input-section 존재 확인
+            const inputSection = document.getElementById('input-section');
+            if (!inputSection) {
+                console.error("resetGame: input-section 요소를 찾을 수 없습니다.");
+                return;
+            }
 
-            // 숫자 입력 칸에 포커스를 다시 설정
-            document.getElementById('doors').focus();
+            // 초기화 작업 수행
+            const doorsInput = document.getElementById('doors');
+            const carsInput = document.getElementById('cars');
+            const resultsDiv = document.getElementById('results');
+            const resetButton = document.getElementById('reset-button');
+            const closeButton = document.getElementById('close-button');
+
+            if (doorsInput && carsInput && resultsDiv && resetButton && closeButton) {
+                doorsInput.value = '';
+                carsInput.value = '';
+                resultsDiv.innerHTML = '';
+                resetButton.style.display = 'none';
+                closeButton.style.display = 'none';
+                inputSection.style.display = 'block';
+
+                // 포커스 다시 설정
+                doorsInput.focus();
+            } else {
+                console.error("resetGame: 필요한 요소를 찾을 수 없습니다.");
+            }
         }
 
         function closeWindow() {
             window.close();
         }
 
-        // 페이지 로드 시 자동으로 포커스 설정
         window.onload = function() {
             document.getElementById('doors').focus();
         };
