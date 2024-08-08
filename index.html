@@ -41,6 +41,9 @@
             margin-top: 20px;
             font-weight: bold;
         }
+        #reset-button, #close-button {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -130,6 +133,8 @@
             `;
 
             document.getElementById('input-section').style.display = 'none';
+            document.getElementById('reset-button').style.display = 'inline-block';
+            document.getElementById('close-button').style.display = 'inline-block';
         }
 
         function resetGame() {
