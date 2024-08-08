@@ -49,7 +49,6 @@
 <body>
     <h1>몬티 홀 문제</h1>
     <div id="game-container">
-        <!-- input-section이 존재하는지 확인 -->
         <div id="input-section">
             <label for="doors">문의 개수를 입력하세요 (3 이상의 자연수):</label>
             <input type="number" id="doors" min="3">
@@ -146,14 +145,12 @@
         }
 
         function resetGame() {
-            // input-section 존재 확인
             const inputSection = document.getElementById('input-section');
             if (!inputSection) {
                 console.error("resetGame: input-section 요소를 찾을 수 없습니다.");
                 return;
             }
 
-            // 초기화 작업 수행
             const doorsInput = document.getElementById('doors');
             const carsInput = document.getElementById('cars');
             const resultsDiv = document.getElementById('results');
@@ -167,8 +164,6 @@
                 resetButton.style.display = 'none';
                 closeButton.style.display = 'none';
                 inputSection.style.display = 'block';
-
-                // 포커스 다시 설정
                 doorsInput.focus();
             } else {
                 console.error("resetGame: 필요한 요소를 찾을 수 없습니다.");
@@ -176,7 +171,12 @@
         }
 
         function closeWindow() {
-            window.close();
+            // 팝업 창에서만 창을 닫을 수 있도록 허용
+            if (window.opener && window.opener !== window) {
+                window.close();
+            } else {
+                alert("이 창을 직접 닫아주세요.");
+            }
         }
 
         window.onload = function() {
