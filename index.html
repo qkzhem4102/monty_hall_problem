@@ -138,12 +138,16 @@
         }
 
         function resetGame() {
+            // 초기화 작업 수행
             document.getElementById('doors').value = '';
             document.getElementById('cars').value = '';
             document.getElementById('results').innerHTML = '';
             document.getElementById('reset-button').style.display = 'none';
             document.getElementById('close-button').style.display = 'none';
             document.getElementById('input-section').style.display = 'block';
+
+            // 숫자 입력 칸에 포커스를 다시 설정
+            document.getElementById('doors').focus();
         }
 
         function closeWindow() {
